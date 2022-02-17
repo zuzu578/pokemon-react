@@ -12,7 +12,8 @@ const App = () =>{
   const [input , setInput] = useState('');
   const [inintialPokemonData , setInitialPokemonData] = useState([]);
   const [anotherPokemonData , setAnotherPokemonData] = useState([]);
- 
+  const [evolutionInfo , setEvolutionInfo] = useState({})
+  
   const getInput = (e) => {
     setInput(e.target.value);
   }
@@ -28,10 +29,11 @@ const App = () =>{
             setInitialPokemonData(res.data)
             pokemonSpec(res.data.id)
             .then((res=>{
-              setAnotherPokemonData(res.data);
-              evolutionChain(res.data.evolution_chain.url)
+                setAnotherPokemonData(res.data);
+                evolutionChain(res.data.evolution_chain.url)
               .then((res)=>{
                 const evolution_chain = [];
+                console.log(res.data)
                 evolution_chain.push(res.data.chain.species.name)
                 res.data.chain.evolves_to.map((item)=>{
                     item.evolves_to.map((item)=>{
@@ -39,11 +41,13 @@ const App = () =>{
                     })
                   });
                   for(let item of evolution_chain){
-                    getPokemon(item).then((res)=>{
-                      console.log('test!!!!====>',res.data);
+                    getPokemon(item)
+                    .then((res)=>{
+                  
+                    }).catch((e)=>{
+                      throw new Error(e.message)
                     });
                   }
-                  
               })
             }))
             .catch((e)=>{
@@ -56,7 +60,7 @@ const App = () =>{
           }}>검색</Button>
       </InputGroup>
         
-    <List props = {inintialPokemonData} props2 = {anotherPokemonData}/>
+    <List props = {inintialPokemonData} anotherData = {anotherPokemonData} evoultionChain = {evolutionInfo}/>
     </div>
     </div>
   );

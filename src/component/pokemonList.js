@@ -1,6 +1,6 @@
 import { Table} from 'react-bootstrap';
 const PokeMonList = (inintialPokemonData) =>{
-    console.log(inintialPokemonData);
+    console.log(inintialPokemonData.evoultionChain.name);
     if(inintialPokemonData.props.length === 0){
         return(
             <>
@@ -29,6 +29,11 @@ const PokeMonList = (inintialPokemonData) =>{
                     }): null}
                 </div>
                 </div>
+            <div className="evolutionChain">
+                <h2>다음 진화 </h2>
+                    {inintialPokemonData.evoultionChain.name}
+                    <img src={inintialPokemonData.evoultionChain.image}></img>
+            </div>
             <div className="dataArea2">
                 <h2>포켓몬 모습</h2>
                 <div className="sprites">
