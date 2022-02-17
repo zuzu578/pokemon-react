@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { Table} from 'react-bootstrap';
 const PokeMonList = (inintialPokemonData) =>{
-    console.log(inintialPokemonData.props)
+    console.log(inintialPokemonData);
     if(inintialPokemonData.props.length === 0){
         return(
-            <div>
-            </div>
+            <>
+            </>
         )
     }else{
         return(
@@ -41,6 +40,20 @@ const PokeMonList = (inintialPokemonData) =>{
                     <img src={inintialPokemonData.props.sprites.front_female}></img>
                     <img src={inintialPokemonData.props.sprites.front_shiny}></img>
                     <img src={inintialPokemonData.props.sprites.front_shiny_female}></img>
+                </div>
+                <div className="type">
+                    <h2>타입</h2>
+                    <Table striped bordered hover>
+                        <tbody>
+                        {inintialPokemonData.props.types.map(function (item,index) {
+                            return(
+                                <tr key={index}>
+                                    <td>{item.type.name}</td>
+                                </tr>
+                            )
+                        })}    
+                        </tbody>
+                 </Table>
                 </div>
                 <div className="ability">
                 <h2>stat</h2>
